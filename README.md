@@ -32,13 +32,17 @@ A Typst package that provides automatic heading level management.
 
 ## How It Works
 
-The `auto-heading(title, content)` function:
-1. Increments the heading level counter
-2. Creates a heading at the appropriate level
-3. Renders the content
-4. Decrements the heading level counter when done
+The `auto-heading(title, content)` function uses two shared states:
+- A **level counter** — incremented on entry, decremented on exit.
+- A **label stack** — when `labl_nest` is on, each heading's label is pushed on entry and popped on exit, so the current label always reflects the full path of parent labels down to this heading.
 
-This allows you to nest sections naturally without worrying about the absolute heading level numbers.
+So on each call it:
+1. Pushes the new level (and label, if `labl_nest`) onto the stack
+2. Creates a heading at the appropriate level with the derived label
+3. Renders the content
+4. Pops the level (and label) back off the stack when done
+
+This lets you nest sections naturally without worrying about absolute heading levels, and lets nested labels automatically include their ancestors.
 
 ## Heading arguments (`hargs`)
 
