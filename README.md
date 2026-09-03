@@ -40,6 +40,18 @@ The `auto-heading(title, content)` function:
 
 This allows you to nest sections naturally without worrying about the absolute heading level numbers.
 
+## Heading arguments (`hargs`)
+
+Pass extra keyword arguments through to Typst's built-in `heading()` function. The `level` is always computed automatically.
+
+```typst
+#auto-heading(
+  "Chapter 1",
+  [Content],
+  hargs: (numbering: "1.", bookmarked: true),
+)
+```
+
 ## License
 
 MIT License
