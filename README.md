@@ -68,6 +68,24 @@ Attach a Typst `label` to each heading. Use `labl` with a string, or `auto` to d
 #H("Introduction", labl: auto, labl_from_title: it => upper(it))[Text]
 // -> heading labeled <INTRODUCTION>
 ```
+
+### Nested labels
+
+With `labl_nest: true`, parent labels are tracked so the generated label reflects the full hierarchy. Use `labl_constr` to control the separator.
+
+```typst
+#let H = auto-heading
+#H("Chapter 1", labl: "c1", labl_nest: true)[
+  #H("Section 1.1", labl: "s1", labl_nest: true)[Text]
+]
+// -> inner label: <c1:s1>
+
+#H("Chapter 1", labl: "c1", labl_nest: true, labl_constr: it => it.join("."))[
+  #H("Section 1.1", labl: "s1", labl_nest: true)[Text]
+]
+// -> inner label: <c1.s1>
+```
+
 ## License
 
 MIT License
