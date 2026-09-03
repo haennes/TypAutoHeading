@@ -52,6 +52,22 @@ Pass extra keyword arguments through to Typst's built-in `heading()` function. T
 )
 ```
 
+## Labels
+
+Attach a Typst `label` to each heading. Use `labl` with a string, or `auto` to derive it from the title. With `labl: auto`, the `labl_from_title` function converts the title into the label (lowercased by default).
+
+```typst
+#let H = auto-heading
+
+#H("Introduction", labl: "intro")[Text]
+// -> heading labeled <intro>
+
+#H("Introduction", labl: auto)[Text]
+// -> heading labeled <introduction>
+
+#H("Introduction", labl: auto, labl_from_title: it => upper(it))[Text]
+// -> heading labeled <INTRODUCTION>
+```
 ## License
 
 MIT License
